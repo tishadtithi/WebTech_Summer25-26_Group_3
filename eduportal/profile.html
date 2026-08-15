@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Profile — EduPortal</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">E</span> EduPortal</div>
+    <div class="side-role" id="sideRole">Menu</div>
+    <nav class="side-nav" id="sideNav"></nav>
+    <div class="sidebar-foot">
+      <button class="btn btn-outline btn-block" style="color:#cfd7ea; border-color:#3f4f78;" onclick="logout()">Log out</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <h1>My profile</h1>
+        <div class="welcome">View and manage your account details.</div>
+      </div>
+      <div class="user-chip" id="userChip"></div>
+    </div>
+
+    <div class="profile-grid">
+      <div class="profile-card">
+        <div class="profile-avatar" id="bigAvatar"></div>
+        <h3 id="cardName"></h3>
+        <p style="color:var(--text-muted); font-size:0.85rem; text-transform:capitalize;" id="cardRole"></p>
+        <p style="color:var(--text-muted); font-size:0.82rem; word-break:break-all;" id="cardEmail"></p>
+      </div>
+
+      <div>
+        <div class="panel">
+          <div class="panel-head"><h2>Edit information</h2></div>
+          <div class="alert alert-success" id="editSuccess">Profile updated successfully.</div>
+          <form id="editForm" novalidate>
+            <div class="field">
+              <label for="fullName">Full name</label>
+              <input type="text" id="fullName">
+              <div class="field-error">Please enter your full name.</div>
+            </div>
+            <div class="field">
+              <label for="emailField">Email address</label>
+              <input type="email" id="emailField">
+              <div class="field-error">Please enter a valid email address.</div>
+            </div>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </form>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>Change password</h2></div>
+          <div class="alert alert-success" id="pwSuccess">Password changed successfully.</div>
+          <div class="alert alert-danger" id="pwError"></div>
+          <form id="pwForm" novalidate>
+            <div class="field">
+              <label for="currentPw">Current password</label>
+              <input type="password" id="currentPw">
+              <div class="field-error">Current password is incorrect.</div>
+            </div>
+            <div class="field">
+              <label for="newPw">New password</label>
+              <input type="password" id="newPw">
+              <div class="field-error">New password must be at least 6 characters.</div>
+            </div>
+            <button type="submit" class="btn btn-primary">Update password</button>
+          </form>
+        </div>
+
+        <div class="panel" style="border-color:#f3cfc9;">
+          <div class="panel-head"><h2 style="color:var(--danger);">Delete account</h2></div>
+          <p style="color:var(--text-muted); font-size:0.88rem;">This permanently removes your account and any related data (courses or enrollments).</p>
+          <button class="btn btn-danger" onclick="deleteAccount()">Delete my account</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/main.js"></script>
+<script src="js/profile.js"></script>
+</body>
+</html>

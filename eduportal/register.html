@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register — EduPortal</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container">
+    <div class="brand"><span class="brand-mark">E</span> EduPortal</div>
+    <nav>
+      <a href="index.html">Login</a>
+      <a href="register.html">Register</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding: 60px 0;">
+  <div class="container" style="grid-template-columns: 1fr; justify-items: center;">
+    <div class="auth-card" style="max-width: 460px; width: 100%;">
+      <h2>Create your account</h2>
+      <p class="auth-sub">Join as a student to enroll in courses, or as an instructor to publish them.</p>
+
+      <div class="alert alert-success" id="regSuccess">Account created! Redirecting to sign in…</div>
+      <div class="alert alert-danger" id="regError"></div>
+
+      <div class="role-toggle" id="roleToggle">
+        <button type="button" class="active" data-role="student">Student</button>
+        <button type="button" data-role="instructor">Instructor</button>
+      </div>
+
+      <form id="registerForm" novalidate>
+        <div class="field">
+          <label for="name">Full name</label>
+          <input type="text" id="name" placeholder="e.g. Ayesha Rahman">
+          <div class="field-error">Please enter your full name.</div>
+        </div>
+        <div class="field">
+          <label for="email">Email address</label>
+          <input type="email" id="email" placeholder="you@eduportal.com">
+          <div class="field-error">Please enter a valid email address.</div>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="At least 6 characters">
+          <div class="field-error">Password must be at least 6 characters.</div>
+        </div>
+        <div class="field">
+          <label for="confirm">Confirm password</label>
+          <input type="password" id="confirm" placeholder="Re-enter password">
+          <div class="field-error">Passwords do not match.</div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Create account</button>
+      </form>
+
+      <p class="form-foot">Already have an account? <a href="index.html">Sign in</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 EduPortal </footer>
+
+<script src="js/main.js"></script>
+<script>
+  let selectedRole = 'student';
+  document.querySelectorAll('#roleToggle button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#roleToggle button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedRole = btn.dataset.role;
+    });
+  });
+
+  const form = document.getElementById('registerForm');
+  const successBox = document.getElementById('regSuccess');
+  const errorBox = document.getElementById('regError');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    successBox.classList.remove('show');
+    errorBox.classList.remove('show');
+
+    const nameEl = document.getElementById('name');
+    const emailEl = document.getElementById('email');
+    const passEl = document.getElementById('password');
+    const confirmEl = document.getElementById('confirm');
+
+    const nameOk = validateField(nameEl, nameEl.value.trim().length >= 2, 'Please enter your full name.');
+    const emailOk = validateField(emailEl, isValidEmail(emailEl.value.trim()), 'Please enter a valid email address.');
+    const passOk = validateField(passEl, passEl.value.length >= 6, 'Password must be at least 6 characters.');
+    const confirmOk = validateField(confirmEl, confirmEl.value === passEl.value && passEl.value.length > 0, 'Passwords do not match.');
+
+    if (!nameOk || !emailOk || !passOk || !confirmOk) return;
+
+    const result = registerUser({
+      name: nameEl.value.trim(),
+      email: emailEl.value.trim(),
+      password: passEl.value,
+      role: selectedRole
+    });
+
+    if (!result.ok) {
+      errorBox.textContent = result.message;
+      errorBox.classList.add('show');
+      return;
+    }
+
+    successBox.classList.add('show');
+    form.reset();
+    setTimeout(() => { window.location.href = 'index.html'; }, 1400);
+  });
+</script>
+</body>
+</html>

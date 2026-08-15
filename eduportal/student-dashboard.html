@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Dashboard — EduPortal</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">E</span> EduPortal</div>
+    <div class="side-role">Student menu</div>
+    <nav class="side-nav">
+      <a href="student-dashboard.html" class="active">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </a>
+      <a href="profile.html">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        My Profile
+      </a>
+    </nav>
+    <div class="sidebar-foot">
+      <button class="btn btn-outline btn-block" style="color:#cfd7ea; border-color:#3f4f78;" onclick="logout()">Log out</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <h1>Browse courses</h1>
+        <div class="welcome" id="welcomeText"></div>
+      </div>
+      <div class="user-chip" id="userChip"></div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="value" id="statEnrolled">0</div><div class="label">Enrolled courses</div></div>
+      <div class="stat-card"><div class="value" id="statAvailable">0</div><div class="label">Available courses</div></div>
+      <div class="stat-card"><div class="value" id="statAvgProgress">0%</div><div class="label">Average progress</div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h2>My enrolled courses</h2>
+      </div>
+      <div id="myCourses" class="course-grid"></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Available courses</h2>
+      </div>
+      <div class="search-row">
+        <input type="text" id="searchInput" placeholder="Search by course title or code…">
+        <select id="categoryFilter"><option value="">All categories</option></select>
+      </div>
+      <div id="availableCourses" class="course-grid"></div>
+    </div>
+  </main>
+</div>
+
+<script src="js/main.js"></script>
+<script src="js/student.js"></script>
+</body>
+</html>
