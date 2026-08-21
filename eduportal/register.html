@@ -78,7 +78,7 @@
   const successBox = document.getElementById('regSuccess');
   const errorBox = document.getElementById('regError');
 
-  form.addEventListener('submit', function (e) {
+  form.addEventListener('submit', async function (e) {
     e.preventDefault();
     successBox.classList.remove('show');
     errorBox.classList.remove('show');
@@ -95,22 +95,36 @@
 
     if (!nameOk || !emailOk || !passOk || !confirmOk) return;
 
-    const result = registerUser({
-      name: nameEl.value.trim(),
-      email: emailEl.value.trim(),
-      password: passEl.value,
-      role: selectedRole
-    });
+    try {
+      const formData = new FormData();
+      formData.append('name', nameEl.value.trim());
+      formData.append('email', emailEl.value.trim());
+      formData.append('password', passEl.value);
+      formData.append('role', selectedRole);
 
-    if (!result.ok) {
-      errorBox.textContent = result.message;
+      const response = await fetch('backend/api/register.php', {
+        method: 'POST',
+        credentials: 'include',
+        body: formData
+      });
+
+      const result = await response.json();
+
+      if (!result.success) {
+        errorBox.textContent = result.message || 'Registration failed.';
+        errorBox.classList.add('show');
+        return;
+      }
+
+      successBox.classList.add('show');
+      form.reset();
+      setTimeout(() => { window.location.href = 'index.html'; }, 1400);
+
+    } catch (error) {
+      console.error('Register error:', error);
+      errorBox.textContent = 'Failed to connect to server.';
       errorBox.classList.add('show');
-      return;
     }
-
-    successBox.classList.add('show');
-    form.reset();
-    setTimeout(() => { window.location.href = 'index.html'; }, 1400);
   });
 </script>
 </body>

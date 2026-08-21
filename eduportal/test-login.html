@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Login</title>
+</head>
+
+<body>
+
+<h2>Test Login</h2>
+
+<button onclick="testLogin()">Login</button>
+
+<pre id="result"></pre>
+
+<script>
+
+async function testLogin() {
+
+    const formData = new FormData();
+
+    formData.append("email", "tithi@eduportal.com");
+    formData.append("password", "pass123");
+
+    const response = await fetch(
+        "backend/api/login.php",
+        {
+            method: "POST",
+            body: formData
+        }
+    );
+
+    const result = await response.json();
+
+    document.getElementById("result").textContent =
+        JSON.stringify(result, null, 2);
+}
+
+</script>
+
+</body>
+</html>

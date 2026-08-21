@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Progress</title>
+</head>
+<body>
+
+<h2>Test Course Progress</h2>
+
+<form id="progressForm">
+
+    <label>Enrollment ID:</label>
+
+    <input
+        type="text"
+        id="enrollment_id"
+        value="e-6a881c22c15b2"
+    >
+
+    <button type="submit">Increase Progress</button>
+
+</form>
+
+<pre id="result"></pre>
+
+<script>
+
+document.getElementById("progressForm").addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    formData.append(
+        "enrollment_id",
+        document.getElementById("enrollment_id").value
+    );
+
+    const response = await fetch("progress.php", {
+        method: "POST",
+        body: formData
+    });
+
+    const data = await response.json();
+
+    document.getElementById("result").textContent =
+        JSON.stringify(data, null, 2);
+
+});
+
+</script>
+
+</body>
+</html>

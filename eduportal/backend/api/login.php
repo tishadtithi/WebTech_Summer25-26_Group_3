@@ -6,31 +6,70 @@ header('Content-Type: application/json');
 
 require_once '../config/database.php';
 
+
+/*
+|--------------------------------------------------------------------------
+| Only POST is allowed
+|--------------------------------------------------------------------------
+*/
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+
     echo json_encode([
         'success' => false,
         'message' => 'Invalid request method.'
     ]);
+
     exit;
 }
+
+
+/*
+|--------------------------------------------------------------------------
+| Get Login Data
+|--------------------------------------------------------------------------
+*/
 
 $email = trim($_POST['email'] ?? '');
 $password = $_POST['password'] ?? '';
 
+
+/*
+|--------------------------------------------------------------------------
+| Validate Input
+|--------------------------------------------------------------------------
+*/
+
 if ($email === '' || $password === '') {
+
     echo json_encode([
         'success' => false,
         'message' => 'Email and password are required.'
     ]);
+
     exit;
 }
 
+
+/*
+|--------------------------------------------------------------------------
+| Find User
+|--------------------------------------------------------------------------
+*/
+
 try {
 
-    $sql = "SELECT id, name, email, password, role
-            FROM users
-            WHERE email = :email
-            LIMIT 1";
+    $sql = "
+        SELECT
+            id,
+            name,
+            email,
+            password,
+            role
+        FROM users
+        WHERE email = :email
+        LIMIT 1
+    ";
 
     $stmt = $pdo->prepare($sql);
 
@@ -39,6 +78,13 @@ try {
     ]);
 
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Check Credentials
+    |--------------------------------------------------------------------------
+    */
 
     if (!$user || $user['password'] !== $password) {
 
@@ -50,29 +96,58 @@ try {
         exit;
     }
 
-    // Create PHP session
- $_SESSION['user_id'] = $user['id'];
-$_SESSION['name'] = $user['name'];
-$_SESSION['email'] = $user['email'];
-$_SESSION['role'] = $user['role'];
 
-echo json_encode([
-    'success' => true,
-    'message' => 'Login successful.',
-    'user' => [
-        'id' => $user['id'],
-        'name' => $user['name'],
-        'email' => $user['email'],
-        'role' => $user['role']
-    ]
-]);
+    /*
+    |--------------------------------------------------------------------------
+    | Create PHP Session
+    |--------------------------------------------------------------------------
+    */
 
-exit;
+    session_regenerate_id(true);
+
+    $_SESSION['user_id'] = $user['id'];
+    $_SESSION['name'] = $user['name'];
+    $_SESSION['email'] = $user['email'];
+    $_SESSION['role'] = $user['role'];
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Return Successful Login
+    |--------------------------------------------------------------------------
+    */
+
+    echo json_encode([
+
+        'success' => true,
+
+        'message' => 'Login successful.',
+
+        'user' => [
+
+            'id' => $user['id'],
+
+            'name' => $user['name'],
+
+            'email' => $user['email'],
+
+            'role' => $user['role']
+
+        ]
+
+    ]);
+
+    exit;
+
+
 } catch (PDOException $e) {
 
     echo json_encode([
         'success' => false,
         'message' => 'Database error.'
     ]);
+
+    exit;
 }
+
 ?>
