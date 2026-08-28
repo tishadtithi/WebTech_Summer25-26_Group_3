@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+
+        <header class="dashboard-header">
+
+            <div>
+                <h1>Admin Dashboard</h1>
+                <p id="welcome"></p>
+            </div>
+
+            <button onclick="logout()">Logout</button>
+
+        </header>
+
+
+       
+
+        <div class="stats">
+
+            <div class="card">
+                <h3>Total Complaints</h3>
+                <p id="totalComplaints">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Pending</h3>
+                <p id="pendingComplaints">0</p>
+            </div>
+
+            <div class="card">
+                <h3>In Progress</h3>
+                <p id="progressComplaints">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Resolved</h3>
+                <p id="resolvedComplaints">0</p>
+            </div>
+
+        </div>
+
+
+      
+
+        <div class="section">
+
+            <h2>All Complaints</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Student</th>
+                        <th>Subject</th>
+                        <th>Category</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                        <th>Assign Staff</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="complaintTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <script src="../js/check-session.js"></script>
+
+    <script src="../js/logout.js"></script>
+
+    <script src="../js/admin.js"></script>
+
+
+    <script>
+
+        checkSession("admin");
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <header class="dashboard-header">
+
+            <div>
+                <h1>Student Dashboard</h1>
+                <p id="welcome"></p>
+            </div>
+
+            <button onclick="logout()">Logout</button>
+
+        </header>
+
+
+
+        <div class="stats">
+
+            <div class="card">
+                <h3>Total Complaints</h3>
+                <p id="totalComplaints">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Pending</h3>
+                <p id="pendingComplaints">0</p>
+            </div>
+
+            <div class="card">
+                <h3>In Progress</h3>
+                <p id="progressComplaints">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Resolved</h3>
+                <p id="resolvedComplaints">0</p>
+            </div>
+
+        </div>
+
+
+      
+        <div class="section">
+
+            <h2>Submit Complaint</h2>
+
+            <form id="complaintForm">
+
+                <label>Subject</label>
+
+                <input
+                    type="text"
+                    id="subject"
+                    required
+                >
+
+
+                <label>Category</label>
+
+                <select id="category" required>
+
+                    <option value="">Select Category</option>
+
+                    <option value="Electrical">
+                        Electrical
+                    </option>
+
+                    <option value="Classroom">
+                        Classroom
+                    </option>
+
+                    <option value="Cleanliness">
+                        Cleanliness
+                    </option>
+
+                    <option value="Internet">
+                        Internet
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+
+                <label>Location</label>
+
+                <input
+                    type="text"
+                    id="location"
+                    required
+                >
+
+
+                <label>Description</label>
+
+                <textarea
+                    id="description"
+                    rows="5"
+                    required
+                ></textarea>
+
+
+                <button type="submit">
+                    Submit Complaint
+                </button>
+
+            </form>
+
+            <p id="complaintMessage"></p>
+
+        </div>
+
+
+
+        <div class="section">
+
+            <h2>My Complaints</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Subject</th>
+                        <th>Category</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                        <th>Date</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="complaintTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <script src="../js/check-session.js"></script>
+
+    <script src="../js/logout.js"></script>
+
+    <script src="../js/student.js"></script>
+
+
+    <script>
+
+        checkSession("student");
+
+    </script>
+
+</body>
+
+</html>
