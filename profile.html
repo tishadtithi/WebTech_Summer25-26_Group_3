@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <div class="profile-container">
+
+        <div class="profile-card">
+
+            <h1>My Profile</h1>
+
+            <p class="profile-subtitle">
+                Manage your account information
+            </p>
+
+
+            <!-- CURRENT PROFILE -->
+
+            <div class="profile-info">
+
+                <div class="info-row">
+
+                    <strong>Name:</strong>
+
+                    <span id="displayName">
+                        Loading...
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <strong>Email:</strong>
+
+                    <span id="displayEmail">
+                        Loading...
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <strong>Role:</strong>
+
+                    <span id="displayRole">
+                        Loading...
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- EDIT PROFILE -->
+
+            <div class="edit-section">
+
+                <h2>Edit Profile</h2>
+
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your name"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                    >
+
+                </div>
+
+
+                <button
+                    type="button"
+                    onclick="updateProfile()"
+                >
+                    Save Changes
+                </button>
+
+            </div>
+
+
+            <div id="message"></div>
+
+
+          <div class="profile-buttons">
+
+    <a
+        href="javascript:history.back()"
+        class="btn btn-secondary">
+        Back
+    </a>
+
+    <a
+        href="change-password.html"
+        class="btn btn-primary">
+        Change Password
+    </a>
+
+    <button
+        type="button"
+        class="delete-btn"
+        onclick="deleteAccount()">
+        Delete Account
+    </button>
+
+</div>
+
+        </div>
+
+    </div>
+
+
+    <script src="js/profile.js"></script>
+
+</body>
+
+</html>
