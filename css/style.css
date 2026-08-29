@@ -10,7 +10,6 @@ body {
 }
 
 
-
 .container {
     width: 400px;
     max-width: 90%;
@@ -78,9 +77,6 @@ button:hover {
 }
 
 
-/* =========================
-   DASHBOARD
-========================= */
 
 .dashboard {
     width: 92%;
@@ -368,9 +364,7 @@ tr:hover {
 .profile-buttons .btn {
     display: inline-block;
 }
-/* =========================
-   EDIT PROFILE
-========================= */
+
 
 .edit-section {
     margin-top: 25px;
@@ -563,9 +557,7 @@ tr:hover {
     margin-top: 25px;
 
 }
-/* =========================
-   DELETE ACCOUNT
-========================= */
+
 
 .delete-btn {
 
